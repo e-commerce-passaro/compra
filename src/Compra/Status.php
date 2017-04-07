@@ -1,5 +1,5 @@
 <?php
-namespace Compra\Status;
+namespace Ecompassaro\Compra;
 
 class Status
 {

@@ -1,8 +1,8 @@
 <?php
-namespace Compra;
+namespace Ecompassaro\Compra;
 
-use Produto\Produto;
-use Autenticacao\Autenticacao;
+use Ecompassaro\Produto\Produto;
+use Ecompassaro\Autenticacao\Autenticacao;
 use \DateTime;
 
 class Compra
@@ -72,7 +72,7 @@ class Compra
 
     /**
      *
-     * @return \Produto\Produto
+     * @return Produto
      */
     public function getProduto()
     {
@@ -81,7 +81,7 @@ class Compra
 
     /**
      *
-     * @return \Autenticacao\Autenticacao
+     * @return Autenticacao
      */
     public function getAutenticacao()
     {
@@ -112,10 +112,10 @@ class Compra
 
     /**
      *
-     * @param \Produto\Produto $produto            
+     * @param Produto $produto            
      * @return Compra
      */
-    public function setProduto($produto)
+    public function setProduto(Produto $produto)
     {
         $this->produto = $produto;
         return $this;
@@ -123,10 +123,10 @@ class Compra
 
     /**
      *
-     * @param \Autenticacao\Autenticacao $autenticacao            
+     * @param Autenticacao $autenticacao            
      * @return Compra
      */
-    public function setAutenticacao($autenticacao)
+    public function setAutenticacao(Autenticacao $autenticacao)
     {
         $this->autenticacao = $autenticacao;
         return $this;
@@ -193,7 +193,7 @@ class Compra
     }
 
     /**
-     * @return \Compra\Compra\Status\Status
+     * @return Status
      */
     public function getStatus()
     {
@@ -201,10 +201,10 @@ class Compra
     }
 
     /**
-     * @param \Compra\Compra\Status\Status $status
+     * @param Status $status
      * @return Compra
      */
-    public function setStatus($status)
+    public function setStatus(Status $status)
     {
         $this->status = $status;
         return $this;

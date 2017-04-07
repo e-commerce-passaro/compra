@@ -1,5 +1,5 @@
 <?php
-namespace Compra;
+namespace Ecompassaro\Compra;
 
 use Zend\Hydrator\HydratorInterface;
 

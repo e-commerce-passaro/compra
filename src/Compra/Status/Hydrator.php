@@ -1,7 +1,8 @@
 <?php
-namespace Compra\Status;
+namespace Ecompassaro\Compra\Status;
 
 use Zend\Hydrator\HydratorInterface;
+use Ecompassaro\Compra\Status;
 
 class Hydrator implements HydratorInterface
 {

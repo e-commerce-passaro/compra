@@ -1,5 +1,5 @@
 <?php
-namespace Compra;
+namespace Ecompassaro\Compra;
 
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\HydratingResultSet;

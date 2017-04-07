@@ -1,10 +1,10 @@
 {
   "name" : "e-commerce-passaro/compra",
   "description" : "Biblioteca de compra em um e-commerce",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type":"library",
   "homepage":"https://github.com/e-commerce-passaro/compra",
-  "time":"2017-04-06 11:07:01",
+  "time":"2017-04-07 12:43:02",
   "license":"GPL-3.0+",
   "authors":[{
 	"name":"Marcel Bezerra da Silva",
@@ -21,13 +21,13 @@
     "php" : ">=7.0",
     "zendframework/zend-db" : "2.8.*",
     "zendframework/zend-hydrator" : "2.2.*",
-    "e-commerce-passaro/autenticacao" : "1.0.1",
-    "e-commerce-passaro/produto" : "0.0.1"
+    "e-commerce-passaro/autenticacao" : "1.0.2",
+    "e-commerce-passaro/produto" : "1.0.0"
   },
   "keywords" : [ "e-commerce-passaro", "zf3", "ecommerce", "compra" ],
   "autoload": {
-        "psr-4": {
-            "Compra\\": "./src/Compra"
-        }
+    "psr-4": {
+        "Ecompassaro\\Compra\\": "./src/Compra"
+    }
   }  
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Compra\Status;
+namespace Ecompassaro\Compra\Status;
 
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\HydratingResultSet;
@@ -7,6 +7,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Sql\Select;
+use Ecompassaro\Compra\Status;
 
 class Repository
 {
