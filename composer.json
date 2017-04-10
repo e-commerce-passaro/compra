@@ -1,7 +1,7 @@
 {
   "name" : "e-commerce-passaro/compra",
   "description" : "Biblioteca de compra em um e-commerce",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type":"library",
   "homepage":"https://github.com/e-commerce-passaro/compra",
   "time":"2017-04-07 12:43:02",

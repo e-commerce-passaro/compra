@@ -3,7 +3,7 @@ namespace Ecompassaro\Compra;
 
 use \Iterator;
 use Ecompassaro\Compra\Status\Manager as StatusManager;
-use Ecompassaro\Produto\Produto as ProdutoManager;
+use Ecompassaro\Produto\Manager as ProdutoManager;
 use Ecompassaro\Autenticacao\Autenticacao as AutenticacaoManager;
 
 class Manager
