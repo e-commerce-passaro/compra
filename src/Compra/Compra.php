@@ -115,7 +115,7 @@ class Compra
      * @param Produto $produto            
      * @return Compra
      */
-    public function setProduto(Produto $produto)
+    public function setProduto($produto)
     {
         $this->produto = $produto;
         return $this;
@@ -126,7 +126,7 @@ class Compra
      * @param Autenticacao $autenticacao            
      * @return Compra
      */
-    public function setAutenticacao(Autenticacao $autenticacao)
+    public function setAutenticacao($autenticacao)
     {
         $this->autenticacao = $autenticacao;
         return $this;
@@ -204,7 +204,7 @@ class Compra
      * @param Status $status
      * @return Compra
      */
-    public function setStatus(Status $status)
+    public function setStatus($status)
     {
         $this->status = $status;
         return $this;
