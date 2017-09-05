@@ -8,10 +8,10 @@ use \DateTime;
 class Compra
 {
     const QUANTIDADE_DAFAULT = 1;
-    const STATUS_GERADA = 'gerada';
-    const STATUS_SINCRONIZADA = 'sincronizada';
-    const STATUS_EFETUADA = 'efetuada';
-    const STATUS_FINALIZADA = 'finalizada';
+    const MOEDA_DEFAULT = 'BRL';
+    const STATUS_INICIADA = 'iniciada';
+    const STATUS_AGUARDANDO_PAGAMENTO = 'aguardando o pagamento';
+    const STATUS_CONCLUIDA = 'concluida';
     const STATUS_CANCELADA = 'cancelada';
 
     private $id;
@@ -25,12 +25,25 @@ class Compra
     private $autenticacao;
 
     private $data;
-    
-    private $quantidade;
-    
+
+    private $quantidade = self::QUANTIDADE_DAFAULT;
+
     private $status;
-    
+
     private $statusId;
+
+    private $moeda = self::MOEDA_DEFAULT;
+
+    public function getMoeda()
+    {
+      return $this->moeda;
+    }
+
+    public function setMoeda($moeda)
+    {
+      $this->moeda = $moeda;
+      return $this;
+    }
 
     /**
      *
@@ -43,7 +56,7 @@ class Compra
 
     /**
      *
-     * @param int $id            
+     * @param int $id
      * @return Compra
      */
     public function setId($id)
@@ -90,7 +103,7 @@ class Compra
 
     /**
      *
-     * @param int $produtoId            
+     * @param int $produtoId
      * @return Compra
      */
     public function setProdutoId($produtoId)
@@ -101,7 +114,7 @@ class Compra
 
     /**
      *
-     * @param int $autenticacaoId            
+     * @param int $autenticacaoId
      * @return Compra
      */
     public function setAutenticacaoId($autenticacaoId)
@@ -112,7 +125,7 @@ class Compra
 
     /**
      *
-     * @param Produto $produto            
+     * @param Produto $produto
      * @return Compra
      */
     public function setProduto($produto)
@@ -123,7 +136,7 @@ class Compra
 
     /**
      *
-     * @param Autenticacao $autenticacao            
+     * @param Autenticacao $autenticacao
      * @return Compra
      */
     public function setAutenticacao($autenticacao)
@@ -143,7 +156,7 @@ class Compra
 
     /**
      *
-     * @param \DateTime|string $data se string deve vir no formato Y-m-d H:i:s        
+     * @param \DateTime|string $data se string deve vir no formato Y-m-d H:i:s
      * @return Compra
      */
     public function setData($data)
@@ -155,7 +168,7 @@ class Compra
         $this->data = $data;
         return $this;
     }
-    
+
     /**
      * @return int
      */
@@ -209,10 +222,10 @@ class Compra
         $this->status = $status;
         return $this;
     }
-    
+
     /**
      * Obtem a estrutura da entity Compra em formato array
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -222,6 +235,7 @@ class Compra
             'autenticacao_id' => $this->autenticacaoId,
             'status_id' => $this->statusId,
             'quantidade' => $this->quantidade
+            'moeda' => $this->moeda;
         );
     }
 
@@ -237,5 +251,6 @@ class Compra
             ->setAutenticacaoId($array['autenticacao_id'])
             ->setData(isset($array['data'])?$array['data']:null)
             ->setQuantidade(isset($array['quantidade'])?$array['quantidade']:self::QUANTIDADE_DAFAULT);
+            ->setMoeda(isset($array['moeda'])?$array['moeda']:self::MOEDA_DEFAULT);
     }
 }
