@@ -239,6 +239,15 @@ class Compra
         );
     }
 
+    public function getPreco()
+    {
+      if ($this->produto instanceof Produto) {
+        return $this->quantidade * $this->produto->getPreco();
+      }
+
+      return 0;
+    }
+
     /**
      * Preenche a entidade a partir de um array
      * @return Compra
