@@ -77,6 +77,11 @@ class Manager
         return $this->generateListByIterator($this->getRepository()->findAllByAutenticacaoId($autentcacaoId));
     }
 
+    public function obterCompraTemporary($temporaryId)
+    {
+        return $this->generateListByIterator($this->getRepository()->findByTemporaryId($temporaryId));
+    }
+
     /**
      * @return \Produto\ProdutoManager
      */

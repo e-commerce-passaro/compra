@@ -6,7 +6,7 @@ class Status
     protected $id;
     protected $nome;
     protected $labelType;
-    
+
     /**
      * @return int
      */
@@ -14,7 +14,7 @@ class Status
     {
         return $this->id;
     }
-    
+
     /**
      * @return string
      */
@@ -63,7 +63,7 @@ class Status
 
     /**
      * Obtem a estrutura da entity Status em formato array
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -84,5 +84,10 @@ class Status
         return $this->setId($array['id'])
             ->setNome($array['nome'])
             ->setLabelType($array['label_type']);
+    }
+
+    public function equals($nomeStatus)
+    {
+      return $this->nome == $nomeStatus;
     }
 }

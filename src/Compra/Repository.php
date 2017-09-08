@@ -19,7 +19,7 @@ class Repository
 
     /**
      * Obtem o TableGatwey
-     * 
+     *
      * @return \Zend\Db\TableGateway\TableGateway
      */
     private function getTableGateway()
@@ -29,8 +29,8 @@ class Repository
 
     /**
      * Insere o TableGatway
-     * 
-     * @param \Zend\Db\TableGateway\TableGateway $tableGateway            
+     *
+     * @param \Zend\Db\TableGateway\TableGateway $tableGateway
      * @return CompraRepository
      */
     private function setTableGatway(TableGateway $tableGateway)
@@ -41,10 +41,10 @@ class Repository
 
     /**
      * Injeta dependências
-     * 
-     * @param \Zend\Db\Adapter\AdapterInterface $dbAdapter            
-     * @param CompraHydrator $hydrator            
-     * @param Compra $prototipo            
+     *
+     * @param \Zend\Db\Adapter\AdapterInterface $dbAdapter
+     * @param CompraHydrator $hydrator
+     * @param Compra $prototipo
      */
     public function __construct(AdapterInterface $dbAdapter, Hydrator $hydrator, Compra $prototipo)
     {
@@ -56,8 +56,8 @@ class Repository
 
     /**
      * Salva a compra passado por parâmetro no BD
-     * 
-     * @param Compra $compra            
+     *
+     * @param Compra $compra
      */
     public function save(Compra $compra)
     {
@@ -65,7 +65,7 @@ class Repository
         if ($id == 0) {
             $this->getTableGateway()->insert($compra->toArray());
             $compra->setId($this->getTableGateway()->lastInsertValue);
-            
+
             return $compra;
         }
     }
@@ -78,18 +78,18 @@ class Repository
     {
         $sql    = new Sql($this->dbAdapter);
         $select = $sql->select($this->tableName);
-    
+
         $stmt   = $sql->prepareStatementForSqlObject($select);
         $result = $stmt->execute();
         if ($result instanceof ResultInterface && $result->isQueryResult()) {
             $resultSet = new HydratingResultSet($this->hydrator, $this->prototipo);
-    
+
             return $resultSet->initialize($result);
         }
-    
+
         return array();
     }
-    
+
     /**
      * Encontra um iterador com todos as compras relacionadas a uma autenticacao no BD
      * @param int $autenticacaoId
@@ -99,15 +99,31 @@ class Repository
     {
         $sql    = new Sql($this->dbAdapter);
         $select = $sql->select($this->tableName)->where(array('autenticacao_id' => $autenticacaoId));
-        
+
         $stmt   = $sql->prepareStatementForSqlObject($select);
         $result = $stmt->execute();
         if ($result instanceof ResultInterface && $result->isQueryResult()) {
             $resultSet = new HydratingResultSet($this->hydrator, $this->prototipo);
-        
+
             return $resultSet->initialize($result);
         }
-        
+
         return array();
+    }
+    
+    public function findByTemporaryId($temporaryId)
+    {
+      $rowset = $this->getTableGateway()->select(function (Select $select) use($temporaryId) {
+          $select->columns($this->columns)
+          ->where(array(
+              'temporary_id' => $temporaryId
+          ))
+          ->limit(1);
+      });
+      $row = $rowset->current();
+      if (! $row) {
+          return NULL;
+      }
+      return $row;
     }
 }

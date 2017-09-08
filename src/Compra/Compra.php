@@ -8,11 +8,30 @@ use \DateTime;
 class Compra
 {
     const QUANTIDADE_DAFAULT = 1;
+
     const MOEDA_DEFAULT = 'BRL';
-    const STATUS_INICIADA = 'iniciada';
-    const STATUS_AGUARDANDO_PAGAMENTO = 'aguardando o pagamento';
-    const STATUS_CONCLUIDA = 'concluida';
-    const STATUS_CANCELADA = 'cancelada';
+
+    const STATUS_INICIADA = 'iniciada';//status virtual (0)
+
+    const STATUS_RASCUNHO = 'rascunho';//status fisico (12,5)
+
+    const STATUS_CRIADA = 'a pagar';//status virtual (25)
+
+    const STATUS_PENDENTE = 'sincronizada';//status fisico (37,5)
+
+    const STATUS_EXECUTADA = 'respondida';//status virtual (50)
+
+    const STATUS_RECUSADA = 'recusada';//status virtual (87,5)
+
+    const STATUS_CANCELADA = 'cancelada'; //status fisico (100)
+
+    const STATUS_PAGANDO = 'em pagamento';//status virtual (62,5)
+
+    const STATUS_PAGAMENTO_PENDENTE = 'aguardando o pagamento'; //status fisico (75)
+
+    const STATUS_ACEITA = 'paga';//status virtual (87,5)
+
+    const STATUS_FINALIZADA = 'concluida'; //status fisico (100)
 
     private $id;
 
@@ -32,7 +51,13 @@ class Compra
 
     private $statusId;
 
+    private $temporaryId;
+
     private $moeda = self::MOEDA_DEFAULT;
+
+    private $urlPagamento; //TODO colocar na entidade pagamento
+
+    private $externalId; //TODO colocar na entidade pagamento
 
     public function getMoeda()
     {
@@ -62,6 +87,17 @@ class Compra
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    public function getTemporaryId()
+    {
+        return $this->temporaryId;
+    }
+
+    public function setTemporaryId($temporaryId)
+    {
+        $this->temporaryId = $temporaryId;
         return $this;
     }
 
@@ -187,6 +223,28 @@ class Compra
         return $this;
     }
 
+    public function getUrlPagamento()
+    {
+        return $this->urlPagamento;
+    }
+
+    public function setUrlPagamento($urlPagamento)
+    {
+        $this->urlPagamento = $urlPagamento;
+        return $this;
+    }
+
+    public function getExternalId()
+    {
+        return $this->externalId;
+    }
+
+    public function setExternalId($externalId)
+    {
+        $this->externalId = $externalId;
+        return $this;
+    }
+
     /**
      * @return int
      */
@@ -230,13 +288,16 @@ class Compra
      */
     public function toArray()
     {
-        return array(
+        return [
             'produto_id' => $this->produtoId,
+            'temporary_id' => $this->temporaryId,
             'autenticacao_id' => $this->autenticacaoId,
             'status_id' => $this->statusId,
-            'quantidade' => $this->quantidade
-            'moeda' => $this->moeda;
-        );
+            'quantidade' => $this->quantidade,
+            'moeda' => $this->moeda,
+            'url_pagamento' => $this->urlPagamento,
+            'external_id' => $this->externalId
+        ];
     }
 
     public function getPreco()
@@ -255,11 +316,14 @@ class Compra
     public function exchangeArray($array)
     {
         return $this->setId(isset($array['id'])?$array['id']:null)
+            ->setTemporaryId(isset($array['temporary_id'])?$array['temporary_id']:null)
             ->setProdutoId($array['produto_id'])
             ->setStatusId(isset($array['status_id'])?$array['status_id']:null)
             ->setAutenticacaoId($array['autenticacao_id'])
             ->setData(isset($array['data'])?$array['data']:null)
-            ->setQuantidade(isset($array['quantidade'])?$array['quantidade']:self::QUANTIDADE_DAFAULT);
-            ->setMoeda(isset($array['moeda'])?$array['moeda']:self::MOEDA_DEFAULT);
+            ->setQuantidade(isset($array['quantidade'])?$array['quantidade']:self::QUANTIDADE_DAFAULT)
+            ->setMoeda(isset($array['moeda'])?$array['moeda']:self::MOEDA_DEFAULT)
+            ->setUrlPagamento(isset($array['url_pagamento'])?$array['url_pagamento']:null)
+            ->setExternalId(isset($array['external_id'])?$array['external_id']:null);
     }
 }
