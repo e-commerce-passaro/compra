@@ -107,7 +107,11 @@ class Compra
      */
     public function getProdutoId()
     {
-        return (int) $this->produtoId;
+      if ($this->produto instanceof Produto) {
+        return (int) $this->produto->getId();
+      }
+
+      return (int) $this->produtoId;
     }
 
     /**
@@ -116,6 +120,9 @@ class Compra
      */
     public function getAutenticacaoId()
     {
+      if ($this->autenticacao instanceof Autenticacao) {
+        return (int) $this->autenticacao->getId();
+      }
         return (int) $this->autenticacaoId;
     }
 
@@ -259,8 +266,12 @@ class Compra
      */
     public function setStatusId($statusId)
     {
-        $this->statusId = $statusId;
-        return $this;
+      if ($this->status instanceof Status) {
+        return (int) $this->status->getId();
+      }
+
+      $this->statusId = $statusId;
+      return $this;
     }
 
     /**
@@ -289,14 +300,14 @@ class Compra
     public function toArray()
     {
         return [
-            'produto_id' => $this->produtoId,
-            'temporary_id' => $this->temporaryId,
-            'autenticacao_id' => $this->autenticacaoId,
-            'status_id' => $this->statusId,
-            'quantidade' => $this->quantidade,
-            'moeda' => $this->moeda,
-            'url_pagamento' => $this->urlPagamento,
-            'external_id' => $this->externalId
+            'produto_id' => $this->getProdutoId(),
+            'temporary_id' => $this->getTemporaryId(),
+            'autenticacao_id' => $this->getAutenticacaoId(),
+            'status_id' => $this->getStatusId(),
+            'quantidade' => $this->getQuantidade(),
+            'moeda' => $this->getMoeda(),
+            'url_pagamento' => $this->getUrlPagamento(),
+            'external_id' => $this->getExternalId()
         ];
     }
 

@@ -69,9 +69,9 @@ class Status
     public function toArray()
     {
         return array(
-            'id' => $this->id,
-            'nome' => $this->nome,
-            'label_type' => $this->labelType
+            'id' => $this->getId(),
+            'nome' => $this->getNome(),
+            'label_type' => $this->getLabelType()
         );
     }
 
